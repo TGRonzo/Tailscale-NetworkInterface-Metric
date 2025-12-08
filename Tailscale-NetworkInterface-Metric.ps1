@@ -8,8 +8,11 @@
     This script finds the Windows network interface(s) associated with
     Tailscale (matches InterfaceAlias or InterfaceDescription).
     For any found interface it logs the current metric. If the metric is
-    less than 500 the script sets it to 666, logs the change (with date/time)
+    less than $MinNetworkMetric the script sets it to $MinNetworkMetric, logs the change (with date/time)
     and shows a popup message to the user indicating the change.
+
+    This resolves the issue where Tailscale's network interface metric is lower then the local LAN interface,
+    causing local LAN traffic to be routed over the Tailscale VPN instead of the local network
 
 .NOTES
     - The script attempts to re-launch itself elevated if not already running
@@ -17,6 +20,7 @@
     - Log file is created next to the script as `tailscale-metric.log`.
     - Intended to be run at user logon/startup (see README-setup-startup.md)
 #>
+
 ### --- Safety / environment checks ---
 # Ensure we have the script path variable available (PowerShell 3+)
 if (-not $PSCommandPath) { $PSCommandPath = $MyInvocation.MyCommand.Path }
@@ -24,9 +28,14 @@ if (-not $PSCommandPath) { $PSCommandPath = $MyInvocation.MyCommand.Path }
 # Path to log file (created next to the script so it's easy to find)
 $logFile = Join-Path -Path $PWD.Path -ChildPath 'tailscale-metric.log'
 
-# If current metric is less than this, it will be updated.
+# If Tailscale Network metric is less than this, it will be updated.
 $MinNetworkMetric = 666
 
+# ------------
+# Functions
+# ------------
+
+# Logging
 function Log {
     param([string]$Message)
     $time = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -34,6 +43,7 @@ function Log {
 }
 Log "-- Script started ---"
 
+# Ensure the script is running as Administrator
 function Ensure-RunningAsAdmin {
     $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = New-Object Security.Principal.WindowsPrincipal($currentUser)
@@ -44,7 +54,10 @@ function Ensure-RunningAsAdmin {
     Log "Script is running with administrator privileges."
 }
 
-### --- Main logic ---
+#--------
+# Main
+#--------
+
 Ensure-RunningAsAdmin
 
 # Find any NetIPInterface entries that mention Tailscale in their alias or description.
@@ -91,4 +104,3 @@ foreach ($iface in $interfaces) {
     }
 }
 Log "Script finished"
-
