@@ -1,0 +1,14 @@
+﻿2025-12-08 20:26:19 - -- Script started ---
+2025-12-08 20:26:19 - Script is running with administrator privileges.
+2025-12-08 20:26:20 - Found interface Alias='Tailscale' Index=45 AddressFamily=IPv6 CurrentMetric=5
+2025-12-08 20:26:20 - Changed InterfaceMetric for Alias='Tailscale' Index=45 AddressFamily=IPv6 from 5 to 666
+2025-12-08 20:26:30 - Found interface Alias='Tailscale' Index=45 AddressFamily=IPv4 CurrentMetric=5
+2025-12-08 20:26:30 - Changed InterfaceMetric for Alias='Tailscale' Index=45 AddressFamily=IPv4 from 5 to 666
+2025-12-08 20:26:35 - Script finished
+2025-12-08 20:29:57 - -- Script started ---
+2025-12-08 20:29:57 - Script is running with administrator privileges.
+2025-12-08 20:29:57 - Found interface Alias='Tailscale' Index=45 AddressFamily=IPv6 CurrentMetric=5
+2025-12-08 20:29:57 - Changed InterfaceMetric for Alias='Tailscale' Index=45 AddressFamily=IPv6 from 5 to 666
+2025-12-08 20:30:06 - Found interface Alias='Tailscale' Index=45 AddressFamily=IPv4 CurrentMetric=5
+2025-12-08 20:30:06 - Changed InterfaceMetric for Alias='Tailscale' Index=45 AddressFamily=IPv4 from 5 to 666
+2025-12-08 20:30:08 - Script finished
