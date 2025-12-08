@@ -74,7 +74,7 @@ foreach ($iface in $interfaces) {
             # the script continues silently after logging the event.
             try {
                 Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
-                $msg = "Tailscale interface '$alias' $af metric changed from $current to 666."
+                $msg = "Tailscale interface '$alias $af' metric changed from $current to 666."
                 [System.Windows.Forms.MessageBox]::Show($msg, 'Tailscale Metric Updated', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null
             } catch {
                 Log "Could not show popup message: $_"
