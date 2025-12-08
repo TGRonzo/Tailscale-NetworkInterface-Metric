@@ -24,6 +24,9 @@ if (-not $PSCommandPath) { $PSCommandPath = $MyInvocation.MyCommand.Path }
 # Path to log file (created next to the script so it's easy to find)
 $logFile = Join-Path -Path $PWD.Path -ChildPath 'tailscale-metric.log'
 
+# If current metric is less than this, it will be updated.
+$MinNetworkMetric = 666
+
 function Log {
     param([string]$Message)
     $time = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -63,18 +66,18 @@ foreach ($iface in $interfaces) {
     $current = $iface.InterfaceMetric
     Log "Found interface Alias='$alias' Index=$index AddressFamily=$af CurrentMetric=$current"
      
-    # If metric is less than 500, update it to 666 as requested
-    if ($null -ne $current -and ($current -lt 500)) {
+    # If metric is less than $MinNetworkMetric, update it to $MinNetworkMetric
+    if ($null -ne $current -and ($current -lt $MinNetworkMetric)) {
         try {
-            Set-NetIPInterface -InterfaceIndex $index -AddressFamily $af -InterfaceMetric 666 -Confirm:$false -ErrorAction Stop
-            Log "Changed InterfaceMetric for Alias='$alias' Index=$index AddressFamily=$af from $current to 666"
+            Set-NetIPInterface -InterfaceIndex $index -AddressFamily $af -InterfaceMetric $MinNetworkMetric -Confirm:$false -ErrorAction Stop
+            Log "Changed InterfaceMetric for Alias='$alias' Index=$index AddressFamily=$af from $current to $MinNetworkMetric"
 
             # Show a popup to the user to inform them of the change. Use Windows Forms
             # which is available in Windows PowerShell / desktop Windows. If unavailable,
             # the script continues silently after logging the event.
             try {
                 Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
-                $msg = "Tailscale interface '$alias $af' metric changed from $current to 666."
+                $msg = "Tailscale interface '$alias $af' metric changed from $current to $MinNetworkMetric."
                 [System.Windows.Forms.MessageBox]::Show($msg, 'Tailscale Metric Updated', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null
             } catch {
                 Log "Could not show popup message: $_"
