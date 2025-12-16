@@ -1,4 +1,4 @@
-#FINAL CODE (RES)- 08-12-2025
+#FINAL (08/12/2025), FINAL (16/12/2025) RES
 
 <##
 .SYNOPSIS
@@ -54,6 +54,26 @@ function Ensure-RunningAsAdmin {
     Log "Script is running with administrator privileges."
 }
 
+# Show a tray notification with toast message (Thanks JPro!)
+function ShowTrayNotification($message)
+{
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+
+    $objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon 
+
+    $objNotifyIcon.Icon = [System.Drawing.SystemIcons]::Warning
+    $objNotifyIcon.BalloonTipIcon = "Warning" 
+    $objNotifyIcon.BalloonTipText = $message
+    $objNotifyIcon.BalloonTipTitle = "Dude!"
+     
+    $objNotifyIcon.Visible = $True 
+    
+    Register-ObjectEvent $objNotifyIcon BalloonTipClosed -Action {$sender.Dispose();} | Out-Null
+    Register-ObjectEvent $objNotifyIcon BalloonTipClicked -Action {$sender.Dispose();} | Out-Null
+  
+    $objNotifyIcon.ShowBalloonTip(30000)
+}
+
 #--------
 # Main
 #--------
@@ -85,16 +105,14 @@ foreach ($iface in $interfaces) {
             Set-NetIPInterface -InterfaceIndex $index -AddressFamily $af -InterfaceMetric $MinNetworkMetric -Confirm:$false -ErrorAction Stop
             Log "Changed InterfaceMetric for Alias='$alias' Index=$index AddressFamily=$af from $current to $MinNetworkMetric"
 
-            # Show a popup to the user to inform them of the change. Use Windows Forms
-            # which is available in Windows PowerShell / desktop Windows. If unavailable,
+            # Show a tray notification to the user to inform them of the change. If unavailable,
             # the script continues silently after logging the event.
             try {
-                Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
                 $msg = "Tailscale interface '$alias $af' metric changed from $current to $MinNetworkMetric."
-                [System.Windows.Forms.MessageBox]::Show($msg, 'Tailscale Metric Updated', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null
+                ShowTrayNotification -message $msg
             } catch {
-                Log "Could not show popup message: $_"
-            }
+                Log "Could not show tray notification: $_"
+            }              
         }
      catch {
            Log "Failed to set InterfaceMetric for Alias='$alias' Index=$index AddressFamily=$af"

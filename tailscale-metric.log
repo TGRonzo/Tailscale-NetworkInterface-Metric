@@ -5,3 +5,38 @@
 2025-12-08 23:08:18 - Found interface Alias='Tailscale' Index=49 AddressFamily=IPv4 CurrentMetric=5
 2025-12-08 23:08:19 - Changed InterfaceMetric for Alias='Tailscale' Index=49 AddressFamily=IPv4 from 5 to 666
 2025-12-08 23:08:19 - Script finished
+2025-12-16 14:50:32 - -- Script started ---
+2025-12-16 14:50:32 - Script is running with administrator privileges.
+2025-12-16 14:50:32 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv6 CurrentMetric=5
+2025-12-16 14:50:33 - Changed InterfaceMetric for Alias='Tailscale' Index=40 AddressFamily=IPv6 from 5 to 666
+2025-12-16 14:50:33 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv4 CurrentMetric=5
+2025-12-16 14:50:33 - Changed InterfaceMetric for Alias='Tailscale' Index=40 AddressFamily=IPv4 from 5 to 666
+2025-12-16 14:50:33 - Script finished
+2025-12-16 14:51:36 - -- Script started ---
+2025-12-16 14:51:36 - Script is running with administrator privileges.
+2025-12-16 14:51:36 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv6 CurrentMetric=666
+2025-12-16 14:51:36 - No change required for Alias='Tailscale' Index=40 AddressFamily=IPv6 (metric = 666)
+2025-12-16 14:51:36 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv4 CurrentMetric=666
+2025-12-16 14:51:36 - No change required for Alias='Tailscale' Index=40 AddressFamily=IPv4 (metric = 666)
+2025-12-16 14:51:36 - Script finished
+2025-12-16 14:52:04 - -- Script started ---
+2025-12-16 14:52:04 - Script is running with administrator privileges.
+2025-12-16 14:52:04 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv6 CurrentMetric=665
+2025-12-16 14:52:04 - Changed InterfaceMetric for Alias='Tailscale' Index=40 AddressFamily=IPv6 from 665 to 666
+2025-12-16 14:52:04 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv4 CurrentMetric=665
+2025-12-16 14:52:05 - Changed InterfaceMetric for Alias='Tailscale' Index=40 AddressFamily=IPv4 from 665 to 666
+2025-12-16 14:52:05 - Script finished
+2025-12-16 14:56:46 - -- Script started ---
+2025-12-16 14:56:46 - Script is running with administrator privileges.
+2025-12-16 14:56:46 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv6 CurrentMetric=6
+2025-12-16 14:56:47 - Changed InterfaceMetric for Alias='Tailscale' Index=40 AddressFamily=IPv6 from 6 to 666
+2025-12-16 14:56:47 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv4 CurrentMetric=6
+2025-12-16 14:56:47 - Changed InterfaceMetric for Alias='Tailscale' Index=40 AddressFamily=IPv4 from 6 to 666
+2025-12-16 14:56:47 - Script finished
+2025-12-16 14:59:04 - -- Script started ---
+2025-12-16 14:59:04 - Script is running with administrator privileges.
+2025-12-16 14:59:05 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv6 CurrentMetric=666
+2025-12-16 14:59:05 - No change required for Alias='Tailscale' Index=40 AddressFamily=IPv6 (metric = 666)
+2025-12-16 14:59:05 - Found interface Alias='Tailscale' Index=40 AddressFamily=IPv4 CurrentMetric=666
+2025-12-16 14:59:05 - No change required for Alias='Tailscale' Index=40 AddressFamily=IPv4 (metric = 666)
+2025-12-16 14:59:05 - Script finished
